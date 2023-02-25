@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Tela } from './components/Screen'
+import { BotoesVazio, BotoesNum, BotoesSimb } from './components/Buttons'
 import './App.css'
 
 export default function App() {
@@ -6,47 +8,7 @@ export default function App() {
   const [numAntigo, setNumAntigo] = useState(0)
   const [operador, setOperador] = useState()
 
-  const btnum = [7, 8, 9, 4, 5, 6, 1, 2, 3, '.', 0]
-  const btnsimb = ['/', 'X', '-', '+']
-  const btnv = ['_', '_', '_',]
-
-
-  //Components
-  function Tela() {
-    return(
-      <div className='tela'>
-        <span>{num}</span>
-      </div>
-    )
-  }
-
-  function BotoesVazio() {
-    return(
-      <div>
-        {btnv.map(v => <button> {v} </button>)}
-        <button onClick={Clear}>DEL</button>
-      </div>
-    )
-  }
-
-  function BotoesNum() {
-    return(
-      <div>
-        {btnum.map(n => <button key={n} onClick={InputNum} value={n}> {n} </button>)}
-        <button onClick={Calcular}>=</button>
-      </div>
-    )
-  }
-
-  function BotoesSimb() {
-    return(
-      <div>
-        {btnsimb.map(s => <button key={s} onClick={Operacao} value={s}> {s} </button>)}
-      </div>
-    )
-  }
-
-
+  
   //Funçoes
   function InputNum(e) {
     let valor = e.target.value
@@ -83,13 +45,13 @@ export default function App() {
 
   return (
     <div className="App">
-      <Tela />
+      <Tela resultado={num} />
 
       <div className='botoes'>
-        <BotoesVazio />
+        <BotoesVazio limpar={Clear}/>
         <div className='numSimb'>
-          <BotoesNum />
-          <BotoesSimb />
+          <BotoesNum calc={Calcular} inpnum={InputNum}/>
+          <BotoesSimb ope={Operacao}/>
         </div>
       </div>
     </div>
